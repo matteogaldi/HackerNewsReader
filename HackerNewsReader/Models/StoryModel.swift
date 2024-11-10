@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import SwiftSoup
 
-struct NewsItem: Identifiable, Codable {
+struct Story: Identifiable, Codable {
     let id: Int
     let title: String
     let url: String? // Optional since not all stories have URLs
@@ -15,6 +16,7 @@ struct NewsItem: Identifiable, Codable {
     let score: Int
     let descendants: Int // Number of comments
     let time: TimeInterval
+    let text: String?
     
     var timeAgo: String {
         let currentDate = Date()
@@ -24,37 +26,53 @@ struct NewsItem: Identifiable, Codable {
         
         return formatter.localizedString(for: postDate, relativeTo: currentDate)
     }
+    
+    var storyURL: URL {
+        URL(string: url ?? "https://news.ycombinator.com/item?id=\(id)")!
+    }
+    
+    var parsedText: String {
+        do {
+            let doc: Document = try SwiftSoup.parse(text ?? "")
+            return try doc.text()
+        } catch {
+            return ""
+        }
+    }
 }
 
-extension NewsItem {
-    static var dummyData: [NewsItem] {
+extension Story {
+    static var dummyData: [Story] {
         return [
-            NewsItem(
+            Story(
                 id: 123456,
                 title: "An Interesting Article on AI",
                 url: "https://example.com/interesting-article",
                 by: "johndoe",
                 score: 150,
                 descendants: 45,
-                time: 1700000000
+                time: 1700000000,
+                text: nil
             ),
-            NewsItem(
+            Story(
                 id: 123460,
                 title: "Ask HN: What are the best resources to learn Python?",
                 url: nil,
                 by: "techenthusiast",
                 score: 100,
                 descendants: 30,
-                time: 1700000200
+                time: 1700000200,
+                text: "Aw shucks, guys ... you make me blush with your compliments.<p>Tell you what, Ill make a deal: I'll keep writing if you keep reading. K?"
             ),
-            NewsItem(
+            Story(
                 id: 123463,
                 title: "Hiring: Full Stack Developer at Startup XYZ",
                 url: nil,
                 by: "startupxyz",
                 score: 0, // Job postings typically don't have scores like stories do
                 descendants: 0, // Job postings typically don't have comments
-                time: 1700000300
+                time: 1700000300,
+                text: "Aw shucks, guys ... you make me blush with your compliments.<p>Tell you what, Ill make a deal: I'll keep writing if you keep reading. K?"
             )
         ]
     }

@@ -6,8 +6,11 @@
 //
 import Foundation
 
-class NewsViewModel: ObservableObject {
-    @Published var stories: [NewsItem] = []
+class StoryViewModel: ObservableObject {
+    @Published var stories: [Story] = []
+    @Published var isLoading: Bool = false
+    
+    private let cache = NSCache<NSString, NSArray>()
     
     func loadTopStories() async {
         do {
@@ -24,8 +27,8 @@ class NewsViewModel: ObservableObject {
         }
     }
     
-    func loadTopStories_Preview() {
-        stories = NewsItem.dummyData
+    func loadTopStories_Preview() async {
+        stories = Story.dummyData
     }
 }
 

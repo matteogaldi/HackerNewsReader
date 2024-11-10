@@ -18,9 +18,9 @@ class HNNetworkService {
         return try JSONDecoder().decode([Int].self, from: data)
     }
     
-    func fetchItem(id: Int) async throws -> NewsItem {
+    func fetchItem(id: Int) async throws -> Story {
         let url = URL(string: "https://hacker-news.firebaseio.com/v0/item/\(id).json")!
         let (data, _) = try await URLSession.shared.data(from: url)
-        return try JSONDecoder().decode(NewsItem.self, from: data)
+        return try JSONDecoder().decode(Story.self, from: data)
     }
 }

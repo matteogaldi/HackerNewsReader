@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5FF8A2452CE0BEF5005971E9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 5FF8A2442CE0BEF5005971E9 /* SwiftSoup */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5FC5EBEC2CD960AB004BCA0B /* HackerNewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FF8A2452CE0BEF5005971E9 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = HackerNewsReader;
 			packageProductDependencies = (
+				5FF8A2442CE0BEF5005971E9 /* SwiftSoup */,
 			);
 			productName = HackerNewsReader;
 			productReference = 5FC5EBEC2CD960AB004BCA0B /* HackerNewsReader.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 5FC5EBE32CD960AB004BCA0B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5FF8A2432CE0BEF5005971E9 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5FC5EBED2CD960AB004BCA0B /* Products */;
 			projectDirPath = "";
@@ -324,6 +333,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5FF8A2432CE0BEF5005971E9 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5FF8A2442CE0BEF5005971E9 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FF8A2432CE0BEF5005971E9 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5FC5EBE42CD960AB004BCA0B /* Project object */;
 }
