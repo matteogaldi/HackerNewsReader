@@ -18,7 +18,7 @@ struct StoryView: View {
         HStack {
             if (nestedStory) {
                 Divider()
-                    .frame(maxWidth: 2, maxHeight: 100)
+                    .frame(maxWidth: 2)
                     .background(.accent)
             }
             VStack { 
@@ -36,14 +36,14 @@ struct StoryView: View {
                     
                 }
                 
-                Text((story.text != nil) ? story.parsedText : story.title)
+                Text(story.title != "" ? story.title : story.parsedText)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 if (showLabels) {
                     HStack(spacing: 15) {
                         Label("\(story.score)", systemImage: "hand.thumbsup")
                             .labelStyle(CompactLabelStyle())
-                        Label("\(story.descendants)", systemImage: "message")
+                        Label("\(story.descendants ?? 0)", systemImage: "message")
                             .labelStyle(CompactLabelStyle())
                         
                         Spacer()
