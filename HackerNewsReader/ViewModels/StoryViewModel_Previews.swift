@@ -45,31 +45,4 @@ class StoryViewModel_Previews {
         return vm
     }()
 }
-<<<<<<< HEAD
-
-// Example usage in SwiftUI previews:
-/*
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ContentView(viewModel: StoryViewModel_Previews.loading)
-                .previewDisplayName("Loading State")
-            
-            ContentView(viewModel: StoryViewModel_Previews.populated)
-                .previewDisplayName("Populated State")
-            
-            ContentView(viewModel: StoryViewModel_Previews.error)
-                .previewDisplayName("Error State")
-            
-            ContentView(viewModel: StoryViewModel_Previews.empty)
-                .previewDisplayName("Empty State")
-            
-            ContentView(viewModel: StoryViewModel_Previews.withComments)
-                .previewDisplayName("With Comments")
-        }
-    }
-}
-*/
-=======
->>>>>>> 9457f8b (* Adds preview)
 #endif
