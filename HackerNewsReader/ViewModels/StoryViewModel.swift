@@ -9,26 +9,32 @@ import Foundation
 class StoryViewModel: ObservableObject {
     @Published var stories: [Story] = []
     @Published var isLoading: Bool = false
+    @Published var comments: [Story] = []
     
     private let cache = NSCache<NSString, NSArray>()
     
+    @MainActor
     func loadTopStories() async {
         do {
-            let ids = try await HNNetworkService.shared.fetchTopStories()
-            
-            for id in ids.prefix(30) {
-                let story = try await HNNetworkService.shared.fetchItem(id: id)
-                await MainActor.run {
+            isLoading = true
+            let topStories = try await HNNetworkService.shared.fetchTopStories()
+            let items = try await withThrowingTaskGroup(of: Story.self) { group in
+                for id in topStories.prefix(30) {
+                    group.addTask {
+                        try await HNNetworkService.shared.fetchItem(id: id)
+                    }
+                }
+                var stories: [Story] = []
+                for try await story in group {
                     stories.append(story)
                 }
+                return stories
             }
+            stories.append(contentsOf: items)
+            isLoading = false
         } catch {
             print("Error loading stories: \(error)")
         }
-    }
-    
-    func loadTopStories_Preview() async {
-        stories = Story.dummyData
     }
 }
 

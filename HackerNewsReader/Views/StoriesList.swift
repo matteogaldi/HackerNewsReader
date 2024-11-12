@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StoriesList: View {
-    @StateObject private var viewModel = StoryViewModel()
+    @StateObject var viewModel = StoryViewModel()
     var body: some View {
         NavigationView {
             List(viewModel.stories) { story in
@@ -17,13 +17,16 @@ struct StoriesList: View {
                 }
             }
             .listStyle(.plain)
-            .navigationTitle("Hacker News")
+            .navigationTitle("Top Stories")
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbarBackground(.accent, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
-            .task {
-                await viewModel.loadTopStories_Preview()
-            }
+//            .refreshable {
+//                await viewModel.loadTopStories()
+//            }
+//            .task {
+//                await viewModel.loadTopStories()
+//            }
             
         }
         
@@ -31,5 +34,5 @@ struct StoriesList: View {
 }
 
 #Preview {
-    StoriesList()
+    StoriesList(viewModel: StoryViewModel_Previews.withComments)
 }
